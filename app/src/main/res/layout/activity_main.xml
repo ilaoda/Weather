@@ -11,7 +11,8 @@
     tools:context="com.ilaoda.weather.MainActivity">
 
     <TextView
+        android:background="#5500ff00"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World" />
+        android:text="Hello World!!!123" />
 </RelativeLayout>
