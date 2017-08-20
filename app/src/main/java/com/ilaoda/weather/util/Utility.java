@@ -3,10 +3,12 @@ package com.ilaoda.weather.util;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.ilaoda.weather.db.City;
 import com.ilaoda.weather.db.County;
 import com.ilaoda.weather.db.Province;
+import com.ilaoda.weather.gson.Weather;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -122,5 +124,23 @@ public class Utility {
         }
         // 如果为response为null,即没处理,false
         return false;
+    }
+
+
+    public static Weather handleWeatherResponse(String response) {
+
+        JSONObject jsonObject = null;
+        try {
+            jsonObject = new JSONObject(response);
+            JSONArray jsonArray = jsonObject.getJSONArray("HeWeather");
+            String weatherContent = jsonArray.getJSONObject(0).toString();
+
+            // 将weatherContent json 转换为 Weather 中实体类的对象
+            return new Gson().fromJson(weatherContent, Weather.class);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }
